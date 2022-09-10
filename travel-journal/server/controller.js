@@ -249,7 +249,7 @@ module.exports = {
     },
     getCities: (req, res) => {
         sequelize.query(`
-            SELECT countries.name AS country, countries.country_id, cities.country_id, cities.name AS city, rating
+            SELECT countries.name AS country, countries.country_id, cities.country_id, cities.name AS city, rating, cities.city_id
             FROM countries
             JOIN cities
             ON countries.country_id = cities.country_id
@@ -259,8 +259,7 @@ module.exports = {
         .catch(err => console.log('error getting all the data', err))
     },
     deleteCity: (req, res) => {
-        const { id } = +req.params
-        console.log(id)
+        const { id } = req.params
         sequelize.query(`
             DELETE
             FROM cities
